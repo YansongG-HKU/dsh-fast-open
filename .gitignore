@@ -1,0 +1,4 @@
+node_modules/
+*.jsonl
+coverage/
+.DS_Store

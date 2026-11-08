@@ -1,0 +1,6 @@
+# dsh-fast-open bundle layer — client-only optimization.
+- insert:
+    - id: dsh-fast-open
+      name: dsh-fast-open
+      config:
+        maxRows: 0
