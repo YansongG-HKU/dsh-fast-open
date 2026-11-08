@@ -1,6 +1,6 @@
 {
   "name": "dsh-fast-open",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "private": true,
   "type": "module",
   "description": "会话冷启动加速：对长会话时间线行启用 content-visibility 离屏渲染跳过，压缩首次打开时的布局/绘制时间。纯客户端、纯 CSS、可逆。",
@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "test": "node --test \"test/unit/*.test.mjs\"",
-    "check": "node --check index.js && node --check client.js && node --check scripts/profile-install.mjs && node --test \"test/unit/*.test.mjs\"",
+    "check": "node --check index.js && node --check client.js && node --check scripts/profile-install.mjs && node --check scripts/measure-desktop.mjs && node --test \"test/unit/*.test.mjs\"",
     "install:profile": "node scripts/profile-install.mjs install",
     "uninstall:profile": "node scripts/profile-install.mjs uninstall"
   },

@@ -11,21 +11,27 @@ window.__ModuleLoader__.load({
     ].join('\n')
 
     function inject() {
-      if (document.getElementById(STYLE_ID)) return
+      if (document.getElementById(STYLE_ID)) return null
       const style = document.createElement('style')
       style.id = STYLE_ID
       style.textContent = CSS
       ;(document.head || document.documentElement).appendChild(style)
+      return style
     }
 
     return {
       name: 'dsh-fast-open',
       inject: [],
-      apply() {
-        inject()
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', inject, { once: true })
-        }
+      apply(ctx) {
+        ctx.effect(() => {
+          let owned = inject()
+          const ready = () => { owned ||= inject() }
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, { once: true })
+          return () => {
+            document.removeEventListener('DOMContentLoaded', ready)
+            owned?.remove()
+          }
+        })
       },
     }
   },
